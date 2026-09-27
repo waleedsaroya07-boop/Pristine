@@ -21,8 +21,14 @@ class KnowledgeHubTests(unittest.TestCase):
         self.assertIsNotNone(result)
         self.assertIn("Pakistan", result["answer"])
 
-    def test_unknown_fact_is_not_fabricated(self):
+    def test_specific_unverified_certification_detail_stays_guarded(self):
         result = answer_knowledge("What is your BSCI audit reference number?")
+        self.assertIsNotNone(result)
+        self.assertIn("No certification is assumed", result["answer"])
+        self.assertNotIn("BSCI-", result["answer"])
+
+    def test_unrelated_unknown_fact_is_not_fabricated(self):
+        result = answer_knowledge("What is your registered VAT number?")
         self.assertIsNone(result)
 
     def test_scope_rejects_unknown_value(self):

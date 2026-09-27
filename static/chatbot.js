@@ -15,19 +15,44 @@
   root.innerHTML = `
     <button class="pa-chat-launch" type="button" aria-expanded="false">Trade Enquiry</button>
     <section class="pa-chat-panel" hidden aria-label="Pristine Apparel wholesale assistant">
-      <header class="pa-chat-header"><div><strong>Pristine Apparel</strong><span>Wholesale Assistant</span></div><button class="pa-chat-close" type="button" aria-label="Close chat">×</button></header>
+      <header class="pa-chat-header"><div><strong>Pristine Apparel</strong><span>Wholesale Assistant · Knowledge Hub</span></div><button class="pa-chat-close" type="button" aria-label="Close chat">×</button></header>
       <div class="pa-chat-messages" aria-live="polite"></div>
       <div class="pa-chat-quick"><button type="button" data-msg="Astra">Astra</button><button type="button" data-msg="Medium">Medium</button><button type="button" data-msg="Workwear">Workwear</button><button type="button" class="pa-chat-voice" aria-label="Speak message">🎙</button></div>
       <div class="pa-chat-cta" hidden><button type="button">Continue to enquiry</button></div>
-      <form class="pa-chat-form"><input class="pa-chat-input" aria-label="Message" autocomplete="off" placeholder="Tell us what you need…" required><button type="submit">Send</button></form>
-      <small>Quote-first wholesale assistance. Prices, lead times and certifications are confirmed per order.</small>
+      <form class="pa-chat-form"><input class="pa-chat-input" aria-label="Message" autocomplete="off" placeholder="Ask about products, MOQs or your order…" required><button type="submit">Send</button></form>
+      <small>Answers use verified Pristine wholesale knowledge. Prices, lead times and certifications are confirmed per order.</small>
     </section>`;
   document.body.appendChild(root);
 
   const launch=root.querySelector('.pa-chat-launch'),panel=root.querySelector('.pa-chat-panel'),close=root.querySelector('.pa-chat-close'),messages=root.querySelector('.pa-chat-messages'),form=root.querySelector('.pa-chat-form'),input=root.querySelector('.pa-chat-input'),voice=root.querySelector('.pa-chat-voice'),cta=root.querySelector('.pa-chat-cta');
   if (lead) panel.insertBefore(lead, form);
 
-  const add=(text,role)=>{const el=document.createElement('div');el.className=`pa-chat-message ${role}`;el.textContent=text;messages.appendChild(el);messages.scrollTop=messages.scrollHeight};
+  const add=(text,role,citations=[])=>{
+    const item=document.createElement('div');
+    item.className=`pa-chat-item ${role}`;
+    const bubble=document.createElement('div');
+    bubble.className=`pa-chat-message ${role}`;
+    bubble.textContent=text;
+    item.appendChild(bubble);
+    if(role==='bot'&&Array.isArray(citations)&&citations.length){
+      const sources=document.createElement('div');
+      sources.className='pa-chat-citations';
+      const label=document.createElement('span');
+      label.textContent='Sources: ';
+      sources.appendChild(label);
+      citations.forEach((citation,index)=>{
+        const source=document.createElement('a');
+        source.textContent=citation.title;
+        source.href=citation.source_path||'#';
+        if(location.hostname.endsWith('onrender.com')) source.removeAttribute('href');
+        sources.appendChild(source);
+        if(index<citations.length-1)sources.appendChild(document.createTextNode(' · '));
+      });
+      item.appendChild(sources);
+    }
+    messages.appendChild(item);
+    messages.scrollTop=messages.scrollHeight;
+  };
 
   function summary(state){
     return [
@@ -61,12 +86,13 @@
       const res=await fetch(`${apiBase}/api/chat`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({session_id:sessionId||null,message})});
       if(!res.ok)throw new Error();
       const data=await res.json();
-      sessionId=data.session_id; latestState=data.state; localStorage.setItem('pristine_chat_session',sessionId); add(data.reply,'bot');
+      sessionId=data.session_id; latestState=data.state; localStorage.setItem('pristine_chat_session',sessionId);
+      add(data.reply,'bot',data.citations||[]);
       if(data.state&&data.state.ready_for_quote){localStorage.setItem('pristine_quote_prefill',JSON.stringify(data.state));cta.hidden=false;}
     }catch(e){add('The wholesale assistant is temporarily unavailable. Please use the website enquiry form.','bot')}
   }
 
-  launch.onclick=()=>{panel.hidden=!panel.hidden;launch.setAttribute('aria-expanded',String(!panel.hidden));if(!panel.hidden&&!messages.children.length){add('Welcome to Pristine Apparel wholesale. Which range are you looking at – Astra (premium), Medium, or Workwear?','bot');input.focus()}};
+  launch.onclick=()=>{panel.hidden=!panel.hidden;launch.setAttribute('aria-expanded',String(!panel.hidden));if(!panel.hidden&&!messages.children.length){add('Welcome to Pristine Apparel wholesale. Ask me about our ranges, MOQs, products or process. To start a quotation, which range are you looking at – Astra (premium), Medium, or Workwear?','bot');input.focus()}};
   close.onclick=()=>{panel.hidden=true;launch.setAttribute('aria-expanded','false')};
   form.onsubmit=e=>{e.preventDefault();send(input.value)};
   root.querySelectorAll('[data-msg]').forEach(b=>b.onclick=()=>send(b.dataset.msg));

@@ -195,6 +195,8 @@ def respond(message: str, state: ConversationState) -> dict:
         text = f'{safe} {question}'
     elif grounded:
         text = f'{grounded["answer"]} {question}'
+    elif question_like:
+        text = f"I don't have a verified Pristine source for that, so I won't guess. {question}"
     else:
         text = question
 

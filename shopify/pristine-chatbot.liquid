@@ -1,0 +1,15 @@
+{% if section.settings.enabled %}
+  <link rel="stylesheet" href="{{ section.settings.api_base | append: '/static/chatbot.css' }}">
+  <script src="{{ section.settings.api_base | append: '/static/chatbot.js' }}" data-api-base="{{ section.settings.api_base }}" defer></script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Pristine wholesale chatbot",
+  "settings": [
+    {"type":"checkbox","id":"enabled","label":"Enable chatbot","default":false},
+    {"type":"text","id":"api_base","label":"Chatbot API base URL","default":"https://example.com"}
+  ],
+  "presets": [{"name":"Pristine wholesale chatbot"}]
+}
+{% endschema %}

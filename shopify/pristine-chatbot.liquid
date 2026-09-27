@@ -1,28 +1,49 @@
 <div data-pristine-chatbot-host hidden>
   <div class="pa-chat-lead" hidden>
-    <h3>Send your wholesale enquiry</h3>
-    <p>Your specification will be included automatically. Submitting this form does not place an order or take payment.</p>
+    <h3>{{ 'sections.pristine-chatbot.lead_heading' | t }}</h3>
+    <p>{{ 'sections.pristine-chatbot.lead_intro' | t }}</p>
     {% form 'contact', id: 'PristineChatLead', class: 'pa-chat-lead-form' %}
-      {% if form.posted_successfully? %}<p>Thanks. Your wholesale enquiry has been sent for review.</p>{% endif %}
-      {{ form.errors | default_errors }}
-      <label for="PristineLeadName">Name</label>
+      <div data-pa-success="{{ form.posted_successfully? }}">
+        {% if form.posted_successfully? %}
+          <p>{{ 'sections.pristine-chatbot.success' | t }}</p>
+        {% endif %}
+        {{ form.errors | default_errors }}
+      </div>
+      <label for="PristineLeadName">{{ 'sections.pristine-chatbot.name' | t }}</label>
       <input id="PristineLeadName" name="contact[name]" autocomplete="name" required>
-      <label for="PristineLeadOrganisation">Organisation</label>
+      <label for="PristineLeadOrganisation">{{ 'sections.pristine-chatbot.organisation' | t }}</label>
       <input id="PristineLeadOrganisation" name="contact[Organisation]" autocomplete="organization">
-      <label for="PristineLeadEmail">Email</label>
+      <label for="PristineLeadEmail">{{ 'sections.pristine-chatbot.email' | t }}</label>
       <input id="PristineLeadEmail" name="contact[email]" type="email" autocomplete="email" required>
-      <label for="PristineLeadPhone">Phone / WhatsApp</label>
+      <label for="PristineLeadPhone">{{ 'sections.pristine-chatbot.phone' | t }}</label>
       <input id="PristineLeadPhone" name="contact[phone]" type="tel" autocomplete="tel">
-      <label for="PristineLeadDestination">Delivery destination</label>
+      <label for="PristineLeadDestination">{{ 'sections.pristine-chatbot.destination' | t }}</label>
       <input id="PristineLeadDestination" name="contact[Delivery destination]">
       <textarea name="contact[body]" hidden></textarea>
-      <button type="submit">Submit enquiry</button>
+      <button type="submit">{{ 'sections.pristine-chatbot.submit' | t }}</button>
     {% endform %}
   </div>
 </div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/waleedsaroya07-boop/Pristine@bd5baf1d3cd82a7ae5f66e26382d9d8544ea6ef5/static/chatbot.css">
-<script src="https://cdn.jsdelivr.net/gh/waleedsaroya07-boop/Pristine@bd5baf1d3cd82a7ae5f66e26382d9d8544ea6ef5/static/chatbot.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/waleedsaroya07-boop/Pristine@a8bdf77cbcab3020ac4f00817bde4a26b2b16b5c/static/chatbot.css">
+<script src="https://cdn.jsdelivr.net/gh/waleedsaroya07-boop/Pristine@a8bdf77cbcab3020ac4f00817bde4a26b2b16b5c/static/chatbot.js" defer></script>
 
 {% schema %}
-{"name":"Pristine Chatbot","settings":[],"presets":[{"name":"Pristine Chatbot"}]}
+{
+  "name": "Pristine Chatbot",
+  "settings": [],
+  "presets": [{"name": "Pristine Chatbot"}],
+  "locales": {
+    "en": {
+      "lead_heading": "Send your wholesale enquiry",
+      "lead_intro": "Your specification will be included automatically. Submitting this form does not place an order or take payment.",
+      "success": "Thanks. Your wholesale enquiry has been sent for review.",
+      "name": "Name",
+      "organisation": "Organisation",
+      "email": "Email",
+      "phone": "Phone / WhatsApp",
+      "destination": "Delivery destination",
+      "submit": "Submit enquiry"
+    }
+  }
+}
 {% endschema %}

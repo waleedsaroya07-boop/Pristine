@@ -60,6 +60,7 @@
   const saved=localStorage.getItem('pristine_quote_prefill');
   if(saved){try{const state=JSON.parse(saved);if(prefillQuote(state))localStorage.removeItem('pristine_quote_prefill')}catch(e){localStorage.removeItem('pristine_quote_prefill')}}
 
+  if(postedSuccess){lead.hidden=false;panel.hidden=false;launch.setAttribute('aria-expanded','true');add('Thanks. Your wholesale enquiry has been sent for review.','bot')}
   const Recognition=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(Recognition){const r=new Recognition();r.lang='en-GB';r.interimResults=false;r.maxAlternatives=1;voice.onclick=()=>r.start();r.onresult=e=>send(e.results[0][0].transcript);r.onerror=()=>add('Voice input was not available. Please type your message.','bot')}else voice.hidden=true;
 })();

@@ -4,9 +4,7 @@
     <p>{{ 'sections.pristine-chatbot.lead_intro' | t }}</p>
     {% form 'contact', id: 'PristineChatLead', class: 'pa-chat-lead-form' %}
       <div data-pa-success="{{ form.posted_successfully? }}">
-        {% if form.posted_successfully? %}
-          <p>{{ 'sections.pristine-chatbot.success' | t }}</p>
-        {% endif %}
+        {% if form.posted_successfully? %}<p>{{ 'sections.pristine-chatbot.success' | t }}</p>{% endif %}
         {{ form.errors | default_errors }}
       </div>
       <label for="PristineLeadName">{{ 'sections.pristine-chatbot.name' | t }}</label>
@@ -18,14 +16,14 @@
       <label for="PristineLeadPhone">{{ 'sections.pristine-chatbot.phone' | t }}</label>
       <input id="PristineLeadPhone" name="contact[phone]" type="tel" autocomplete="tel">
       <label for="PristineLeadDestination">{{ 'sections.pristine-chatbot.destination' | t }}</label>
-      <input id="PristineLeadDestination" name="contact[Delivery destination]">
+      <input id="PristineLeadDestination" name="contact[Delivery destination]" required>
       <textarea name="contact[body]" hidden></textarea>
       <button type="submit">{{ 'sections.pristine-chatbot.submit' | t }}</button>
     {% endform %}
   </div>
 </div>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/waleedsaroya07-boop/Pristine@a8bdf77cbcab3020ac4f00817bde4a26b2b16b5c/static/chatbot.css">
-<script src="https://cdn.jsdelivr.net/gh/waleedsaroya07-boop/Pristine@a8bdf77cbcab3020ac4f00817bde4a26b2b16b5c/static/chatbot.js" defer></script>
+<link rel="stylesheet" href="https://pristine-apparel-chatbot.onrender.com/static/chatbot.css">
+<script src="https://pristine-apparel-chatbot.onrender.com/static/chatbot.js" data-api-base="https://pristine-apparel-chatbot.onrender.com" defer></script>
 
 {% schema %}
 {

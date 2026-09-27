@@ -37,5 +37,10 @@ class PristineBotTests(unittest.TestCase):
         self.assertIn('private-label',result['reply'].lower())
         self.assertTrue(result['citations'])
         self.assertEqual(result['citations'][0]['source_path'],'/pages/private-label-manufacturing')
+    def test_unknown_question_explicitly_refuses_to_guess(self):
+        s=ConversationState()
+        result=respond('What is your registered VAT number?',s)
+        self.assertIn("don't have a verified Pristine source",result['reply'])
+        self.assertFalse(result['citations'])
 
 if __name__=='__main__': unittest.main()

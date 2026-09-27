@@ -1,5 +1,5 @@
 import unittest
-from pristine_bot import ConversationState, detect_quantity, reply
+from pristine_bot import ConversationState, detect_quantity, reply, respond
 
 class PristineBotTests(unittest.TestCase):
     def test_astra_moq_rejects_below_minimum(self):
@@ -31,5 +31,11 @@ class PristineBotTests(unittest.TestCase):
         self.assertEqual(s.pending_field,'colour')
         reply('How much per piece?',s)
         self.assertIsNone(s.colour); self.assertEqual(s.pending_field,'colour')
+    def test_grounded_private_label_answer_returns_source(self):
+        s=ConversationState()
+        result=respond('Can you manufacture private label for my brand?',s)
+        self.assertIn('private-label',result['reply'].lower())
+        self.assertTrue(result['citations'])
+        self.assertEqual(result['citations'][0]['source_path'],'/pages/private-label-manufacturing')
 
 if __name__=='__main__': unittest.main()

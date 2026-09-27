@@ -1,6 +1,8 @@
 from dataclasses import dataclass, asdict
 import re
 
+from knowledge_base import answer_knowledge
+
 RANGES = {
     'astra': ('Astra', 50),
     'medium': ('Medium', 150),
@@ -22,6 +24,11 @@ PRODUCTS = [
     'football kits', 'football kit', 'training wear', 'tracksuits', 'tracksuit',
     'jackets', 'jacket', 'custom apparel', 'workwear', 'uniforms', 'uniform', 'private label',
 ]
+QUESTION_PREFIXES = (
+    'what ', 'which ', 'where ', 'when ', 'how ', 'why ', 'who ',
+    'do ', 'does ', 'can ', 'could ', 'is ', 'are ', 'will ', 'tell me', 'explain'
+)
+
 
 @dataclass
 class ConversationState:
@@ -65,6 +72,11 @@ def norm(text: str) -> str:
 def detect_quantity(text: str) -> int | None:
     nums = re.findall(r'\b(\d{2,7})\b', norm(text).replace(',', ''))
     return max(map(int, nums)) if nums else None
+
+
+def looks_like_question(text: str) -> bool:
+    cleaned = norm(text)
+    return text.strip().endswith('?') or cleaned.startswith(QUESTION_PREFIXES)
 
 
 def policy_answer(text: str) -> str | None:
@@ -167,10 +179,27 @@ def next_question(state: ConversationState) -> str:
     return 'Your core specification is complete. Select Continue to enquiry and add your contact and delivery details. Your specification will be attached automatically; no order or payment is placed by this chat.'
 
 
-def reply(message: str, state: ConversationState) -> str:
+def respond(message: str, state: ConversationState) -> dict:
     safe = policy_answer(message)
+    question_like = looks_like_question(message)
+    grounded = answer_knowledge(message) if question_like else None
+
     update_known_facts(message, state)
-    if not safe:
+    if not safe and not question_like:
         capture_pending_answer(message, state)
+
     question = next_question(state)
-    return f'{safe} {question}' if safe else question
+    citations = grounded["citations"] if grounded else []
+
+    if safe:
+        text = f'{safe} {question}'
+    elif grounded:
+        text = f'{grounded["answer"]} {question}'
+    else:
+        text = question
+
+    return {"reply": text, "citations": citations}
+
+
+def reply(message: str, state: ConversationState) -> str:
+    return respond(message, state)["reply"]

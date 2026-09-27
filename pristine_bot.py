@@ -164,7 +164,7 @@ def next_question(state: ConversationState) -> str:
         return 'What is your target delivery date or required timeline?'
 
     state.pending_field = None
-    return 'Your core specification is complete. Please use the website wholesale enquiry form to send your name, organisation, email or phone/WhatsApp, and delivery destination. The team can then prepare a quotation; no order or payment is placed by this chat.'
+    return 'Your core specification is complete. Select Continue to enquiry and add your contact and delivery details. Your specification will be attached automatically; no order or payment is placed by this chat.'
 
 
 def reply(message: str, state: ConversationState) -> str:

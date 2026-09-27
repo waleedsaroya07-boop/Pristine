@@ -16,5 +16,20 @@ class PristineBotTests(unittest.TestCase):
         self.assertIn('No certification is assumed',reply('Are these ISO certified?',ConversationState()))
     def test_quantity_parser(self):
         self.assertEqual(detect_quantity('We need 1,500 pieces'),1500)
+    def test_sequential_spec_capture(self):
+        s=ConversationState()
+        reply('Astra football kits 50 pieces for a club',s)
+        self.assertEqual(s.pending_field,'colour')
+        reply('Navy and gold',s); self.assertEqual(s.colour,'Navy and gold'); self.assertEqual(s.pending_field,'fabric_preference')
+        reply('technical polyester',s); self.assertEqual(s.fabric_preference,'technical polyester'); self.assertEqual(s.pending_field,'size_ratio')
+        reply('S 10, M 20, L 20',s); self.assertEqual(s.size_ratio,'S 10, M 20, L 20'); self.assertEqual(s.pending_field,'branding_method')
+        reply('sublimation',s); self.assertEqual(s.branding_method,'sublimation'); self.assertEqual(s.pending_field,'required_certifications')
+        reply('none specified',s); self.assertEqual(s.required_certifications,'none specified'); self.assertEqual(s.pending_field,'delivery_timeline')
+        reply('15 December',s); self.assertTrue(s.ready_for_quote); self.assertIsNone(s.pending_field)
+    def test_policy_question_does_not_corrupt_pending_field(self):
+        s=ConversationState(); reply('Astra football kits 50 pieces for a club',s)
+        self.assertEqual(s.pending_field,'colour')
+        reply('How much per piece?',s)
+        self.assertIsNone(s.colour); self.assertEqual(s.pending_field,'colour')
 
 if __name__=='__main__': unittest.main()

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "business-positioning",
+    "scope": "general",
+    "title": "Business positioning and production",
+    "answer": "Pristine Apparel is a UK-facing wholesale sportswear and workwear manufacturer with production facilities in Pakistan. The website uses a specification-first, quote-first sales process.",
+    "keywords": ["UK-facing", "UK", "Pakistan", "production", "factory", "manufacturer", "manufacturing", "where made", "where manufactured"],
+    "source_title": "About Pristine Apparel Wholesale",
+    "source_path": "/pages/wholesale-about"
+  },
+  {
+    "id": "range-moqs",
+    "scope": "general",
+    "title": "Ranges and minimum order quantities",
+    "answer": "Pristine Apparel has three ranges: Astra premium from 50 pieces per style/colour, Medium mid-premium from 150 pieces per style/colour, and Workwear / Workmon from 200 pieces per style/colour. These are minimums only; larger quantities can be quoted.",
+    "keywords": ["MOQ", "minimum order", "minimum quantity", "Astra", "Medium", "Workwear", "Workmon", "50", "150", "200", "range", "tiers"],
+    "source_title": "Wholesale Ordering Guide",
+    "source_path": "/pages/wholesale-ordering-guide"
+  },
+  {
+    "id": "product-categories",
+    "scope": "teamwear",
+    "title": "Wholesale product categories",
+    "answer": "The wholesale website is structured around Football Kits, Training Wear, Tracksuits & Jackets, Custom Apparel, Workwear & Uniform, Private Label, and repeat or scale orders.",
+    "keywords": ["products", "categories", "football kits", "training wear", "tracksuits", "jackets", "custom apparel", "workwear", "uniform", "what do you make", "what do you sell"],
+    "source_title": "Wholesale Teamwear",
+    "source_path": "/pages/wholesale-teamwear"
+  },
+  {
+    "id": "customisation",
+    "scope": "teamwear",
+    "title": "Custom colours, branding and sizes",
+    "answer": "Wholesale enquiries can specify colourways, logos or branding, and size runs. The final branding method, materials and production specification are confirmed per order before commitment.",
+    "keywords": ["custom", "customise", "customize", "colour", "color", "logo", "branding", "embroidery", "print", "sublimation", "sizes", "size run", "teamwear"],
+    "source_title": "Wholesale FAQ",
+    "source_path": "/pages/wholesale-faq"
+  },
+  {
+    "id": "astra-material-direction",
+    "scope": "teamwear",
+    "title": "Astra material direction",
+    "answer": "For Astra, suitable premium directions can include merino wool, technical polyester, performance stretch blends and high-end cotton-modal mixes. Exact composition, fabric weight, sampling details and size specification must be confirmed for the individual order.",
+    "keywords": ["Astra fabric", "premium fabric", "merino", "technical polyester", "stretch blend", "cotton modal", "materials"],
+    "source_title": "Wholesale Teamwear",
+    "source_path": "/pages/wholesale-teamwear"
+  },
+  {
+    "id": "medium-material-direction",
+    "scope": "teamwear",
+    "title": "Medium range material direction",
+    "answer": "For the Medium range, the approved direction includes cotton-poly blends, mid-weight performance fabrics and durable sportswear materials. Final composition, weight and specification are confirmed per order.",
+    "keywords": ["Medium fabric", "mid-premium", "cotton poly", "performance fabric", "durable sportswear", "materials"],
+    "source_title": "Wholesale Teamwear",
+    "source_path": "/pages/wholesale-teamwear"
+  },
+  {
+    "id": "workwear-material-direction",
+    "scope": "workwear",
+    "title": "Workwear material direction",
+    "answer": "Workwear / Workmon is positioned around durable functional garments. Suitable directions can include heavy-duty cotton, reinforced poly-cotton and use-case-appropriate functional materials. Final fabric, wash, safety and certification requirements are confirmed for the specific order.",
+    "keywords": ["workwear fabric", "workmon", "heavy duty cotton", "poly cotton", "reinforced", "functional", "uniform", "durability"],
+    "source_title": "Wholesale Workwear / Workmon",
+    "source_path": "/pages/wholesale-workwear"
+  },
+  {
+    "id": "private-label",
+    "scope": "private_label",
+    "title": "Private-label manufacturing",
+    "answer": "Pristine Apparel supports private-label wholesale enquiries for brands and resellers. The brief can include garment and market, range, quantity, fabric, labels, trims, packaging, branding, sizing, required standards, destination and target timing. Samples, artwork, final specifications, pricing and timing are agreed before bulk production.",
+    "keywords": ["private label", "own brand", "reseller", "labels", "trims", "packaging", "brand manufacturing", "OEM"],
+    "source_title": "Private Label Manufacturing",
+    "source_path": "/pages/private-label-manufacturing"
+  },
+  {
+    "id": "wholesale-process",
+    "scope": "process",
+    "title": "Wholesale ordering process",
+    "answer": "The wholesale process is Enquiry → Specification → Quote → Approval → Production & QC → Delivery. The enquiry stage does not place an order or take payment.",
+    "keywords": ["process", "how to order", "ordering", "enquiry", "specification", "quote", "approval", "production", "QC", "delivery", "steps"],
+    "source_title": "Manufacturing & Wholesale Process",
+    "source_path": "/pages/manufacturing-process"
+  },
+  {
+    "id": "pricing-and-lead-time",
+    "scope": "process",
+    "title": "Pricing and lead-time confirmation",
+    "answer": "Wholesale pricing and lead time are not fixed or invented by the website assistant. They are confirmed after the actual product, range, quantity, materials, branding, approvals, standards and delivery requirement have been reviewed.",
+    "keywords": ["price", "pricing", "cost", "per piece", "unit price", "lead time", "delivery time", "production time", "how much", "how long"],
+    "source_title": "Wholesale FAQ",
+    "source_path": "/pages/wholesale-faq"
+  },
+  {
+    "id": "certification-policy",
+    "scope": "compliance",
+    "title": "Certification and compliance policy",
+    "answer": "No certification is assumed to apply automatically. Buyers should state the exact certification, safety standard or compliance requirement needed, and applicability must be verified for the specific order before a commitment is made.",
+    "keywords": ["certification", "certified", "certificate", "ISO", "CE", "standard", "compliance", "safety"],
+    "source_title": "Wholesale Workwear / Workmon",
+    "source_path": "/pages/wholesale-workwear"
+  },
+  {
+    "id": "repeat-and-scale",
+    "scope": "trade",
+    "title": "Repeat and scale orders",
+    "answer": "Trade buyers can submit repeat-order references and request higher quantities, including container-scale orders. Quantity above the MOQ can be quoted; the MOQ is never a maximum.",
+    "keywords": ["repeat order", "reorder", "scale", "bulk", "container", "full container", "large quantity", "higher quantity", "trade buyer"],
+    "source_title": "Trade Buyers & Repeat Orders",
+    "source_path": "/pages/trade-buyers"
+  }
+]

@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: pristine-apparel-chatbot
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
